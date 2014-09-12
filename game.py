@@ -5,11 +5,13 @@ import curses
 stdscr = curses.initscr()
 curses.noecho()
 curses.curs_set(0)
+curses.start_color()
+curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
 stdscr.keypad(1)
 curses.cbreak()
 
 # print some text
-stdscr.addstr(0,1,"Sliding Puzzle By MaomiHz",curses.A_BOLD)
+stdscr.addstr(0,1,"Sliding Puzzle By MaomiHz",curses.color_pair(1))
 stdscr.addstr(1,1,"Press q to exit",curses.A_STANDOUT)
 
 def swap(ary,index1,index2) :
