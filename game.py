@@ -126,7 +126,7 @@ while True:
 		if checkwin(list):
 			stdscr.addstr(3 + size + 2,1,"You win!!! Press n to restart")
 		else:
-			stdscr.addstr(8 + size + 2,1," "*30)
+			stdscr.addstr(3 + size + 2,1," "*30)
 
 		stdscr.refresh()
 		userin = stdscr.getch()
