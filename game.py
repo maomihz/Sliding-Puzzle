@@ -92,7 +92,7 @@ def initlist(size):
 
 # Start of the game...
 while True:
-	size = 4;
+	size = 7;
 	list = initlist(size)
 
 	for i in range(1,1000):
@@ -102,13 +102,13 @@ while True:
 	userin = ' '
 	while userin != ord('n'):
 	
-		if userin == ord('w') or userin == 259:
+		if userin == ord('w') or userin == curses.KEY_UP or userin == ord('k'):
 			advance(list,UP)
-		elif userin == ord('d') or userin == 261:
+		elif userin == ord('d') or userin == curses.KEY_RIGHT or userin == ord('l'):
 			advance(list,RIGHT)
-		elif userin == ord('s') or userin == 258:
+		elif userin == ord('s') or userin == curses.KEY_DOWN or userin == ord('j'):
 			advance(list,DOWN)
-		elif userin == ord('a') or userin == 260:
+		elif userin == ord('a') or userin == LEFT or userin == ord('h'):
 			advance(list,LEFT)
 		elif userin == ord('q') or userin == 27:
 			curses.endwin()
@@ -124,9 +124,9 @@ while True:
 			stdscr.move(4+i,1)
 
 		if checkwin(list):
-			stdscr.addstr(8,1,"You win!!! Press n to restart")
+			stdscr.addstr(3 + size + 2,1,"You win!!! Press n to restart")
 		else:
-			stdscr.addstr(8,1," "*30)
+			stdscr.addstr(8 + size + 2,1," "*30)
 
 		stdscr.refresh()
 		userin = stdscr.getch()
