@@ -89,16 +89,18 @@ def initlist(size):
 	list[size-1][size-1] = 0
 	return list
 				
+#shuffle the list
+def shuffle(list):
+	for i in range(1,1000):
+		advance(list,random.randint(0,3))
+
 
 # Start of the game...
 while True:
 	size = 4;
 	list = initlist(size)
-
-	for i in range(1,1000):
-		advance(list,random.randint(0,3))
-
-
+	shuffle(list)
+	
 	userin = ' '
 	while userin != ord('n'):
 	
