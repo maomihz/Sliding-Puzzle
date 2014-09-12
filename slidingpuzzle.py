@@ -92,3 +92,4 @@ while True:
 #        stdscr.addstr("{0:4d}".format(userin))
 curses.endwin()
     
+
