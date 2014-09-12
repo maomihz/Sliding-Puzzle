@@ -18,8 +18,10 @@ LEFT = 3
 
 
 # print some text
-stdscr.addstr(0,1,"Sliding Puzzle By MaomiHz",curses.color_pair(1))
-stdscr.addstr(1,1,"Press q to exit",curses.A_STANDOUT)
+text = "Sliding Puzzle By MaomiHz"
+stdscr.addstr(0,curses.COLS / 2 - len(text) / 2,"Sliding Puzzle By MaomiHz",curses.color_pair(1))
+text = "Press q to exit..."
+stdscr.addstr(20,curses.COLS - len(text),"Press q to exit",curses.A_STANDOUT)
 
 
 #:::Functions:::
