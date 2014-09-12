@@ -1,14 +1,16 @@
 import random
 import curses
 
+# window initialization
 stdscr = curses.initscr()
 curses.noecho()
 curses.curs_set(0)
 stdscr.keypad(1)
-stdscr.move(0,1)
-stdscr.addstr("Sliding Puzzle By MaomiHz")
-stdscr.move(1,1)
-stdscr.addstr("Press q to exit")
+curses.cbreak()
+
+# print some text
+stdscr.addstr(0,1,"Sliding Puzzle By MaomiHz")
+stdscr.addstr(1,1,"Press q to exit")
 
 def swap(ary,index1,index2) :
     temp = ary[index1]
@@ -79,11 +81,9 @@ while True:
             stdscr.move(i+4,1)
 
         if checkwin(list):
-            stdscr.move(8,1)
-            stdscr.addstr("You win!!! Press n to restart")
+            stdscr.addstr(8,1,"You win!!! Press n to restart")
         else:
-            stdscr.move(8,1)
-            stdscr.addstr(" "*30)
+            stdscr.addstr(8,1," "*30)
 
 
         stdscr.refresh()
