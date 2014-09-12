@@ -10,7 +10,7 @@ curses.cbreak()
 
 # print some text
 stdscr.addstr(0,1,"Sliding Puzzle By MaomiHz",curses.A_BOLD)
-stdscr.addstr(1,1,"Press q to exit")
+stdscr.addstr(1,1,"Press q to exit",curses.A_STANDOUT)
 
 def swap(ary,index1,index2) :
     temp = ary[index1]
@@ -81,7 +81,7 @@ while True:
             stdscr.move(i+4,1)
 
         if checkwin(list):
-            stdscr.addstr(8,1,"You win!!! Press n to restart",curses.A_BLINK)
+            stdscr.addstr(8,1,"You win!!! Press n to restart")
         else:
             stdscr.addstr(8,1," "*30)
 
