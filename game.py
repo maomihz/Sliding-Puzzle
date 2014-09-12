@@ -92,7 +92,7 @@ def initlist(size):
 
 # Start of the game...
 while True:
-	size = 7;
+	size = 4;
 	list = initlist(size)
 
 	for i in range(1,1000):
@@ -108,7 +108,7 @@ while True:
 			advance(list,RIGHT)
 		elif userin == ord('s') or userin == curses.KEY_DOWN or userin == ord('j'):
 			advance(list,DOWN)
-		elif userin == ord('a') or userin == LEFT or userin == ord('h'):
+		elif userin == ord('a') or userin == curses.KEY_LEFT or userin == ord('h'):
 			advance(list,LEFT)
 		elif userin == ord('q') or userin == 27:
 			curses.endwin()
