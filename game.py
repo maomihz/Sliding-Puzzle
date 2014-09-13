@@ -11,7 +11,7 @@ curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLUE)
 stdscr.keypad(1)
 curses.cbreak()
 
-size = 3
+default_size = 4
 gamewin = curses.newwin(9+2,9*4 + 2,2,6)
 infowin = curses.newwin(5,9*4 + 2,13,6)
 infowin.border(0,0,0,0)
@@ -104,10 +104,12 @@ def shuffle(list):
 
 # Start of the game...
 while True:
+	size = default_size
 	list = initlist(size)	
 	shuffle(list)
+	gamewin.clear()
 	
-	userin = ' '
+	userin = 0
 	while userin != ord('n'):
 	
 		if userin == ord('w') or userin == curses.KEY_UP or userin == ord('k'):
@@ -118,6 +120,12 @@ while True:
 			advance(list,DOWN)
 		elif userin == ord('a') or userin == curses.KEY_LEFT or userin == ord('h'):
 			advance(list,LEFT)
+		elif userin >= ord('3') and userin <= ord('9'):
+			default_size = userin - ord('0')
+			infowin.addstr(2,2,"Size Changed to {0}x{0}. Restart now".format(userin - ord('0')))
+			infowin.refresh()
+			userin = stdscr.getch()
+			continue
 		elif userin == ord('q') or userin == 27:
 			curses.endwin()
 			exit()
@@ -131,9 +139,9 @@ while True:
 					gamewin.addstr(" "*4)
 
 		if checkwin(list):
-			infowin.addstr(2,2,"You win!!! Press n to restart")
+			infowin.addstr(2,2,"You win!!! Press n to restart    ")
 		else:
-			infowin.addstr(2,2,"Press Arrow Key To Play...   ")
+			infowin.addstr(2,2,"Press Arrow Key To Play...       ")
 			infowin.border(0,0,0,0)
 
 		stdscr.refresh()
