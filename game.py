@@ -10,6 +10,8 @@ curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
 stdscr.keypad(1)
 curses.cbreak()
 
+size = 4
+gamewin = curses.newwin(size,size*4 + 1,5,8)
 #Direction Constants
 UP = 0
 RIGHT = 1
@@ -97,8 +99,7 @@ def shuffle(list):
 
 # Start of the game...
 while True:
-	size = 4;
-	list = initlist(size)
+	list = initlist(size)	
 	shuffle(list)
 	
 	userin = ' '
@@ -116,14 +117,13 @@ while True:
 			curses.endwin()
 			exit()
 
-		stdscr.move(3,1)
 		for i in range(0,size):
+			gamewin.move(i,0)
 			for j in range(0,size):
 				if list[i][j] != 0:
-					stdscr.addstr("{0:4d}".format(list[i][j]))
+					gamewin.addstr("{0:4d}".format(list[i][j]))
 				else:
-					stdscr.addstr(" "*4)
-			stdscr.move(4+i,1)
+					gamewin.addstr(" "*4)
 
 		if checkwin(list):
 			stdscr.addstr(3 + size + 2,1,"You win!!! Press n to restart")
@@ -131,6 +131,7 @@ while True:
 			stdscr.addstr(3 + size + 2,1," "*30)
 
 		stdscr.refresh()
+		gamewin.refresh()
 		userin = stdscr.getch()
 
 #End of the program
