@@ -12,6 +12,8 @@ curses.cbreak()
 
 size = 4
 gamewin = curses.newwin(9+2,9*4 + 2,2,6)
+infowin = curses.newwin(5,9*4 + 2,13,6)
+infowin.border(0,0,0,0)
 
 #Direction Constants
 UP = 0
@@ -128,12 +130,15 @@ while True:
 					gamewin.addstr(" "*4)
 
 		if checkwin(list):
-			stdscr.addstr(3 + size + 2,1,"You win!!! Press n to restart")
+			infowin.addstr(2,2,"You win!!! Press n to restart")
 		else:
-			stdscr.addstr(3 + size + 2,1," "*30)
+			infowin.clear()
+			infowin.addstr(2,2,"Press Arrow Key To Play...")
+			infowin.border(0,0,0,0)
 
 		stdscr.refresh()
 		gamewin.refresh()
+		infowin.refresh()
 		userin = stdscr.getch()
 
 #End of the program
