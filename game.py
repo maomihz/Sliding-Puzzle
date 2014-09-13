@@ -11,7 +11,8 @@ stdscr.keypad(1)
 curses.cbreak()
 
 size = 4
-gamewin = curses.newwin(size,size*4 + 1,5,8)
+gamewin = curses.newwin(9+2,9*4 + 2,2,6)
+
 #Direction Constants
 UP = 0
 RIGHT = 1
@@ -116,9 +117,10 @@ while True:
 		elif userin == ord('q') or userin == 27:
 			curses.endwin()
 			exit()
-
+		gamewin.clear()
+		gamewin.border(0,0,0,0,0,0,0,0)
 		for i in range(0,size):
-			gamewin.move(i,0)
+			gamewin.move(i+1,1)
 			for j in range(0,size):
 				if list[i][j] != 0:
 					gamewin.addstr("{0:4d}".format(list[i][j]))
