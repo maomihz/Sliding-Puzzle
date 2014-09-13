@@ -7,13 +7,15 @@ curses.noecho()
 curses.curs_set(0)
 curses.start_color()
 curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
+curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLUE)
 stdscr.keypad(1)
 curses.cbreak()
 
-size = 4
+size = 3
 gamewin = curses.newwin(9+2,9*4 + 2,2,6)
 infowin = curses.newwin(5,9*4 + 2,13,6)
 infowin.border(0,0,0,0)
+infowin.attron(curses.color_pair(1))
 
 #Direction Constants
 UP = 0
@@ -96,7 +98,7 @@ def initlist(size):
 				
 #shuffle the list
 def shuffle(list):
-	for i in range(1,1000):
+	for i in range(1,5000):
 		advance(list,random.randint(0,3))
 
 
@@ -119,7 +121,6 @@ while True:
 		elif userin == ord('q') or userin == 27:
 			curses.endwin()
 			exit()
-		gamewin.clear()
 		gamewin.border(0,0,0,0,0,0,0,0)
 		for i in range(0,size):
 			gamewin.move(i+1,1)
@@ -132,8 +133,7 @@ while True:
 		if checkwin(list):
 			infowin.addstr(2,2,"You win!!! Press n to restart")
 		else:
-			infowin.clear()
-			infowin.addstr(2,2,"Press Arrow Key To Play...")
+			infowin.addstr(2,2,"Press Arrow Key To Play...   ")
 			infowin.border(0,0,0,0)
 
 		stdscr.refresh()
