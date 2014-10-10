@@ -12,8 +12,8 @@ stdscr.keypad(1)
 curses.cbreak()
 
 default_size = 4
-gamewin = curses.newwin(9+2,9*4 + 2,2,6)
-infowin = curses.newwin(5,9*4 + 2,13,6)
+gamewin = curses.newwin(9+2,9*4 + 2,2,curses.COLS/2-(9*4+2)/2)
+infowin = curses.newwin(5,9*4 + 2,13,curses.COLS/2-(9*4+2)/2)
 infowin.border(0,0,0,0)
 infowin.attron(curses.color_pair(1))
 
