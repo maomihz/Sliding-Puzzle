@@ -104,46 +104,62 @@ def shuffle(list):
 
 # Start of the game...
 while True:
-	size = default_size
-	list = initlist(size)	
-	shuffle(list)
-	gamewin.clear()
+	size = default_size     # size is the game grid side, default 4
+	list = initlist(size)	# initialize the list
+	shuffle(list)           # shuffle the list for play
+	gamewin.clear()	        # Clear the whole screen
 	
-	userin = 0
+	userin = 0    # Waiting for user to press a key
 	while userin != ord('n'):
-	
+		
+		# Up Key
 		if userin == ord('w') or userin == curses.KEY_UP or userin == ord('k'):
 			advance(list,UP)
+		# Right key
 		elif userin == ord('d') or userin == curses.KEY_RIGHT or userin == ord('l'):
 			advance(list,RIGHT)
+		# Down Key
 		elif userin == ord('s') or userin == curses.KEY_DOWN or userin == ord('j'):
 			advance(list,DOWN)
+		# Left Key
 		elif userin == ord('a') or userin == curses.KEY_LEFT or userin == ord('h'):
 			advance(list,LEFT)
+		# User Set Grid Size
+		# Key Press Can Be 3-9 (for 3x3 to 9x9)
 		elif userin >= ord('3') and userin <= ord('9'):
 			default_size = userin - ord('0')
 			infowin.addstr(2,2,"Size Changed to {0}x{0}. Restart now".format(userin - ord('0')))
 			infowin.refresh()
 			userin = stdscr.getch()
 			continue
+		# q or esc(27) key for QUIT
 		elif userin == ord('q') or userin == 27:
 			curses.endwin()
 			exit()
+
+		# Refresh game border
 		gamewin.border(0,0,0,0,0,0,0,0)
+
+		# Print the game grid.
+		# Every number occupy 4 character position, 
+		# and they are left aligned. 
+		# i for line number and j for column number. 
 		for i in range(0,size):
-			gamewin.move(i+1,1)
+			gamewin.move(i+1,1)   # Move the cursor to specific line (line 1,2,3,4...)
 			for j in range(0,size):
 				if list[i][j] != 0:
 					gamewin.addstr("{0:4d}".format(list[i][j]))
-				else:
+				else:    # If number is zero, print 4 spaces. 
 					gamewin.addstr(" "*4)
 
+		# check win and display info. 
 		if checkwin(list):
 			infowin.addstr(2,2,"You win!!! Press n to restart    ")
 		else:
 			infowin.addstr(2,2,"Press Arrow Key To Play...       ")
 			infowin.border(0,0,0,0)
 
+		# refresh every window. 
 		stdscr.refresh()
 		gamewin.refresh()
 		infowin.refresh()
